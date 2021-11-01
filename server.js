@@ -33,13 +33,14 @@ mongoose.connection
 ///////////////////////////////
 // MODELS
 ////////////////////////////////
-const PeopleSchema = new mongoose.Schema({
-  name: String,
-  image: String,
+const BlogSchema = new mongoose.Schema({
   title: String,
+  image: String,
+  desc: String,
+  
 });
 
-const People = mongoose.model("People", PeopleSchema);
+const Blog = mongoose.model("Blog", BlogSchema);
 
 ///////////////////////////////
 // MiddleWare
@@ -56,45 +57,45 @@ app.get("/", (req, res) => {
   res.send("hello world");
 });
 
-// PEOPLE INDEX ROUTE
-app.get("/people", async (req, res) => {
+// BLOG INDEX ROUTE
+app.get("/blog", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.find({}));
+    // send all blog
+    res.json(await Blog.find({}));
   } catch (error) {
     //send error
     res.status(400).json(error);
   }
 });
 
-// PEOPLE CREATE ROUTE
-app.post("/people", async (req, res) => {
+// BLOG CREATE ROUTE
+app.post("/blog", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.create(req.body));
+    // send all 
+    res.json(await Blog.create(req.body));
   } catch (error) {
     //send error
     res.status(400).json(error);
   }
 });
 
-// PEOPLE DELETE ROUTE
-app.delete("/people/:id", async (req, res) => {
+// BLOG DELETE ROUTE
+app.delete("/blog/:id", async (req, res) => {
   try {
-    // send all people
-    res.json(await People.findByIdAndRemove(req.params.id));
+    // send all blog
+    res.json(await Blog.findByIdAndRemove(req.params.id));
   } catch (error) {
     //send error
     res.status(400).json(error);
   }
 });
 
-// PEOPLE UPDATE ROUTE
-app.put("/people/:id", async (req, res) => {
+//BLOG UPDATE ROUTE
+app.put("/blog/:id", async (req, res) => {
   try {
-    // send all people
+    // send all blog
     res.json(
-      await People.findByIdAndUpdate(req.params.id, req.body, { new: true })
+      await Blog.findByIdAndUpdate(req.params.id, req.body, { new: true })
     );
   } catch (error) {
     //send error
